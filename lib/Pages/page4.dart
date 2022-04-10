@@ -34,6 +34,7 @@ class _Page4State extends State<Page4> {
         LocalStorageHelper.localStorage.entries;
     test = [];
     cartItems = [];
+   //git add file test after first commit 
     setState(() {
       var asd = testObject.map((e) {
         if (e.key == "Pahua" ||
