@@ -12,19 +12,26 @@ class RegistrationForm extends StatefulWidget {
 class _RegistrationFormState extends State<RegistrationForm> {
   final _formKey = GlobalKey<FormState>();
 
+  var size, height, width;
   @override
   Widget build(BuildContext context) {
+    size = MediaQuery.of(context).size;
+    height = size.height;
+    width = size.width;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: formRegisterCustomWidget(context),
+        body: SingleChildScrollView(
+          child: formRegisterCustomWidget(context),
+        ),
       ),
     );
   }
 
   Widget formRegisterCustomWidget(BuildContext context) {
     return Container(
-      width: 360,
+      width: width,
+      height: height,
       decoration: const BoxDecoration(
           image: DecorationImage(
               image: AssetImage("assets/images/login1.jpg"),
