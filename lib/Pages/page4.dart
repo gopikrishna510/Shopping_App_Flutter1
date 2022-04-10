@@ -4,7 +4,6 @@ import 'package:shopping_app_flutter/Classes/listitems.dart';
 import 'package:shopping_app_flutter/Database/database_helper.dart';
 import 'package:shopping_app_flutter/Database/local_storage.dart';
 
-
 class Page4 extends StatefulWidget {
   const Page4({Key? key}) : super(key: key);
 
@@ -34,7 +33,7 @@ class _Page4State extends State<Page4> {
         LocalStorageHelper.localStorage.entries;
     test = [];
     cartItems = [];
-   //git add file test after first commit 
+    //git add file test after first commit
     setState(() {
       var asd = testObject.map((e) {
         if (e.key == "Pahua" ||
@@ -102,10 +101,7 @@ class _Page4State extends State<Page4> {
 
   Widget scaffoldCustomWidgetForWeb(BuildContext context) {
     //SingleChildScrollView
-    return Scaffold(
-      body: validateForWeb(context)
-
-    );
+    return Scaffold(body: validateForWeb(context));
   }
 
   Widget scaffoldCustomWidgetForAndroid(BuildContext context) {
@@ -145,19 +141,27 @@ class _Page4State extends State<Page4> {
     print("cartitem ${cartItems.length}");
     print(cartItems);
     return cartItems.isNotEmpty
-        ? GridView.builder(
-            itemCount: cartItems.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 4,
-                crossAxisCount: 1,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 2),
-            itemBuilder: (BuildContext context, int index) {
-              return _rowCustomForWeb(context, index);
-            },
-            padding: const EdgeInsets.all(10),
-            //childAspectRatio: 2,
-            shrinkWrap: true,
+        ? Container(
+            width: width / 1.3,
+            decoration: BoxDecoration(
+              border: Border.all(width: 2.0, color: Colors.red),
+              borderRadius: BorderRadius.zero,
+              //color: Colors.black,
+            ),
+            child: GridView.builder(
+              itemCount: cartItems.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: 4,
+                  crossAxisCount: 1,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 2),
+              itemBuilder: (BuildContext context, int index) {
+                return _rowCustomForWeb(context, index);
+              },
+              padding: const EdgeInsets.all(10),
+              //childAspectRatio: 2,
+              shrinkWrap: true,
+            ),
           )
         : const Center(
             child: Text(
@@ -175,6 +179,7 @@ class _Page4State extends State<Page4> {
           margin: const EdgeInsets.all(0.0),
           padding: const EdgeInsets.all(0.0),
           decoration: const BoxDecoration(
+            //border: Border.all(width: 2.0, color: const Color(0xFFFFFFFF)),
             borderRadius: BorderRadius.zero,
             color: Colors.black,
           ),
@@ -213,7 +218,7 @@ class _Page4State extends State<Page4> {
               ),
               child: FlatButton(
                 onPressed: () {
-                  String name =cartItems[index].imageName;
+                  String name = cartItems[index].imageName;
                   LocalStorageHelper.removeData(name);
                   gettingDataFromLocalStorage();
                 },
@@ -226,6 +231,9 @@ class _Page4State extends State<Page4> {
                 ),
               ),
             ),
+           /* Column(
+                children: const [Divider(color: Colors.black, thickness: 10.0,height: 10,)],
+              ),*/
           ],
         ),
       ],
@@ -316,9 +324,6 @@ class _Page4State extends State<Page4> {
     allRows.forEach(print);
   }
 }
-
-
-
 
 /* Row(
         mainAxisAlignment: MainAxisAlignment.start,
