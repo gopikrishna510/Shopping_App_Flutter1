@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopping_app_flutter/Pages/forgetpassword.dart';
 import 'package:shopping_app_flutter/Pages/homepage.dart';
 import 'package:shopping_app_flutter/Pages/registrationform.dart';
+import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -64,19 +65,18 @@ class _LoginPageState extends State<LoginPage> {
     height = size.height;
     width = size.width;
     return MaterialApp(
-      color: Colors.red,
-      debugShowCheckedModeBanner: false,
-      home:Scaffold(
-        resizeToAvoidBottomInset: true,
-        backgroundColor: Colors.white,
-        /* appBar: kIsWeb
+        color: Colors.red,
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          resizeToAvoidBottomInset: true,
+          backgroundColor: Colors.white,
+          /* appBar: kIsWeb
             ? appBarCustomForWeb(context)
             : appBarCustomForAndroid(context),*/
-        body: kIsWeb
-            ? loginPageCustomForWeb(context)
-            : loginPageCustomForAndroid(context),
-      )
-    );
+          body: kIsWeb
+              ? loginPageCustomForWeb(context)
+              : loginPageCustomForAndroid(context),
+        ));
   }
 
   PreferredSize appBarCustomForAndroid(BuildContext context) {
@@ -231,13 +231,14 @@ class _LoginPageState extends State<LoginPage> {
                             logindata.setString('username', username);*/
                         print(username);
                         //print(password);
-                        callSharedPref(username);
-                        Navigator.push(
+                        //callSharedPref(username);
+                        login();
+                        /*Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => HomePage(title: username),
                           ),
-                        );
+                        );*/
                         // _navigateToNextScreen(context);
                         /* Navigator.push(context,
                                 MaterialPageRoute(builder: (context) => const HomePage()));*/
@@ -301,155 +302,155 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget loginPageCustomForWeb(BuildContext context) {
     return SingleChildScrollView(
-        child:  Container(
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assets/images/login1.jpg"),
-                  fit: BoxFit.cover)),
-          // color: Colors.blue,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                margin: const EdgeInsets.only(top: 60, bottom: 60),
-                child: const Text('My Account', style: TextStyle(fontSize: 25)),
-              ),
-              Center(
-                child: Container(
-                  margin: EdgeInsets.all(10),
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  width: 300,
-                  child: Column(
-                    children: <Widget>[
-                      const Padding(
-                          padding: EdgeInsets.only(bottom: 10, top: 0),
-                          child: Icon(
-                            Icons.person_pin,
-                            size: 130,
-                          )),
-                      Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: TextField(
-                          controller: usernameController,
-                          decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.person_outline_outlined,
-                                color: Colors.black54),
-                            focusColor: Colors.red,
-                            // border: OutlineInputBorder(),
-                            //labelText: 'Login',
-                            //errorText: "",
-                            hintText: 'Enter User_name',
-                          ),
+      child: Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/images/login1.jpg"),
+                fit: BoxFit.cover)),
+        // color: Colors.blue,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 60, bottom: 60),
+              child: const Text('My Account', style: TextStyle(fontSize: 25)),
+            ),
+            Center(
+              child: Container(
+                margin: EdgeInsets.all(10),
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                width: 300,
+                child: Column(
+                  children: <Widget>[
+                    const Padding(
+                        padding: EdgeInsets.only(bottom: 10, top: 0),
+                        child: Icon(
+                          Icons.person_pin,
+                          size: 130,
+                        )),
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: TextField(
+                        controller: usernameController,
+                        decoration: const InputDecoration(
+                          prefixIcon: Icon(Icons.person_outline_outlined,
+                              color: Colors.black54),
+                          focusColor: Colors.red,
+                          // border: OutlineInputBorder(),
+                          //labelText: 'Login',
+                          //errorText: "",
+                          hintText: 'Enter User_name',
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: TextField(
-                          controller: passwordController,
-                          obscureText: true,
-                          decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.lock_outline_rounded,
-                                color: Colors.black54),
-                            focusColor: Colors.red,
-                            // border: OutlineInputBorder(),
-                            //labelText: 'Login',
-                            //errorText: "",
-                            hintText: 'Enter Password',
-                          ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: TextField(
+                        controller: passwordController,
+                        obscureText: true,
+                        decoration: const InputDecoration(
+                          prefixIcon: Icon(Icons.lock_outline_rounded,
+                              color: Colors.black54),
+                          focusColor: Colors.red,
+                          // border: OutlineInputBorder(),
+                          //labelText: 'Login',
+                          //errorText: "",
+                          hintText: 'Enter Password',
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.only(left: 130),
-                        margin: const EdgeInsets.only(right: 0, left: 0),
-                        child: FlatButton(
-                          textColor: Colors.black54,
-                          child: const Text(
-                            'Forget Password ?',
-                            style: TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.normal),
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const ForgetPassword(),
-                                ));
-                          },
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(left: 130),
+                      margin: const EdgeInsets.only(right: 0, left: 0),
+                      child: FlatButton(
+                        textColor: Colors.black54,
+                        child: const Text(
+                          'Forget Password ?',
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.normal),
                         ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ForgetPassword(),
+                              ));
+                        },
                       ),
-                      Container(
-                        width: 290,
-                        margin: const EdgeInsets.all(20.0),
-                        padding: const EdgeInsets.all(5.0),
-                        decoration: const BoxDecoration(
-                            color: Colors.deepOrangeAccent,
-                            borderRadius: BorderRadius.all(Radius.zero)),
-                        child: FlatButton(
-                          padding: const EdgeInsets.all(10),
-                          textColor: Colors.white,
-                          child: const Text('Login'),
-                          onPressed: () {
-                            String username = usernameController.text;
-                            String password = passwordController.text;
-                            if (username != '' && password != '') {
-                              print('Successful');
-                              /*  logindata.setBool('login', false);
+                    ),
+                    Container(
+                      width: 290,
+                      margin: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.all(5.0),
+                      decoration: const BoxDecoration(
+                          color: Colors.deepOrangeAccent,
+                          borderRadius: BorderRadius.all(Radius.zero)),
+                      child: FlatButton(
+                        padding: const EdgeInsets.all(10),
+                        textColor: Colors.white,
+                        child: const Text('Login'),
+                        onPressed: () {
+                          String username = usernameController.text;
+                          String password = passwordController.text;
+                          if (username != '' && password != '') {
+                            print('Successful');
+                            /*  logindata.setBool('login', false);
                             logindata.setString('username', username);*/
-                              print(username);
-                              //print(password);
-                              callSharedPref(username);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomePage(title: username),
-                                ),
-                              );
-                              //  _navigateToNextScreen(context);
-                              /* Navigator.push(context,
+                            print(username);
+                            //print(password);
+                            callSharedPref(username);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomePage(title: username),
+                              ),
+                            );
+                            //  _navigateToNextScreen(context);
+                            /* Navigator.push(context,
                                 MaterialPageRoute(builder: (context) => const HomePage()));*/
-                            }
-                          },
-                        ),
+                          }
+                        },
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.only(top: 15.0, left: 0),
-                    child: const Text(
-                      "Don't have an account ?",
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black),
-                    ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(top: 15.0, left: 0),
+                  child: const Text(
+                    "Don't have an account ?",
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.black),
                   ),
-                  Container(
-                    padding: const EdgeInsets.only(top: 15.0, left: 0),
-                    margin: const EdgeInsets.only(right: 0, left: 0),
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        padding: const EdgeInsets.all(1.0),
-                        primary: Colors.red,
-                        textStyle: const TextStyle(fontSize: 15),
-                      ),
-                      onPressed: () {},
-                      child: const Text('Register'),
+                ),
+                Container(
+                  padding: const EdgeInsets.only(top: 15.0, left: 0),
+                  margin: const EdgeInsets.only(right: 0, left: 0),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.all(1.0),
+                      primary: Colors.red,
+                      textStyle: const TextStyle(fontSize: 15),
                     ),
+                    onPressed: () {},
+                    child: const Text('Register'),
                   ),
-                ],
-              ),
-            ],
-          ),
+                ),
+              ],
+            ),
+          ],
         ),
+      ),
     );
   }
 
@@ -458,5 +459,33 @@ class _LoginPageState extends State<LoginPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return String
     prefs.setString('title', title);
+  }
+
+  //CREATE FUNCITON TO CALL LOGIN POST API
+  Future<void> login() async {
+    print("login method called ");
+    if (passwordController.text.isNotEmpty &&
+        usernameController.text.isNotEmpty) {
+      print("login method called----1 ");
+      var response = await http.post(Uri.parse("https://regres.in/api/login"),
+          body: ({
+            'email': usernameController.text,
+            'password': passwordController.text
+          }));
+      if (response.statusCode == 200) {
+        print("login method called-----2 ");
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    HomePage(title: usernameController.text)));
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Invalid Credentials.")));
+      }
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Black Field Not Allowed")));
+    }
   }
 }
