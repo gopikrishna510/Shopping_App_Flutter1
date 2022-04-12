@@ -110,39 +110,42 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget loginPageCustomForAndroid(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-              width: width,
-              height: height / 2.6,
-              decoration: const BoxDecoration(
-                  color: Colors.deepOrangeAccent,
-                  borderRadius:
+      child: SizedBox(
+        width:width,
+          height: height,
+          child: Column(
+            children: [
+              Container(
+                  width: width,
+                  height: height / 2.6,
+                  decoration: const BoxDecoration(
+                      color: Colors.deepOrangeAccent,
+                      borderRadius:
                       BorderRadius.only(bottomLeft: Radius.circular(100))),
-              alignment: Alignment.bottomRight,
-              child: Center(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 80.0),
-                      child: Image.asset(
-                          'assets/images/hamburger_login_image.png',
-                          width: 140),
+                  alignment: Alignment.bottomRight,
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 80.0),
+                          child: Image.asset(
+                              'assets/images/hamburger_login_image.png',
+                              width: 140),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 220),
+                          child: Text(
+                            "Login",
+                            style: TextStyle(
+                                fontSize: 26,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ],
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 220),
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                            fontSize: 26,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  ],
-                ),
-              )
-              /*const Padding(
+                  )
+                /*const Padding(
               padding: EdgeInsets.all(50.0),
               child: Text("Login",
                   style: TextStyle(
@@ -151,118 +154,122 @@ class _LoginPageState extends State<LoginPage> {
                       fontWeight: FontWeight.w600)),
             ),*/
               ),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: TextField(
-                    controller: usernameController,
-                    decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.person_outline_outlined,
-                          color: Colors.black12),
-                      focusColor: Colors.red,
-                      /*border: OutlineInputBorder(
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: TextField(
+                        controller: usernameController,
+                        decoration: const InputDecoration(
+                          prefixIcon: Icon(Icons.person_outline_outlined,
+                              color: Colors.black12),
+                          focusColor: Colors.red,
+                          /*border: OutlineInputBorder(
                           borderRadius:
                           BorderRadius.only(bottomLeft:Radius.circular(30),bottomRight:Radius.circular(30))),*/
-                      //border: OutlineInputBorder(),
-                      //labelText: 'User Name',
-                      //errorText: "",
-                      hintText: 'Enter User Name',
+                          //border: OutlineInputBorder(),
+                          //labelText: 'User Name',
+                          //errorText: "",
+                          hintText: 'Enter User Name',
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                  child: TextField(
-                    controller: passwordController,
-                    //hiding text that used for password
-                    obscureText: true,
-                    obscuringCharacter: '*',
-                    decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.lock_outline_rounded,
-                          color: Colors.black12),
-                      focusColor: Colors.red,
-                      /* border: OutlineInputBorder(
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                      child: TextField(
+                        controller: passwordController,
+                        //hiding text that used for password
+                        obscureText: true,
+                        obscuringCharacter: '*',
+                        decoration: const InputDecoration(
+                          prefixIcon: Icon(Icons.lock_outline_rounded,
+                              color: Colors.black12),
+                          focusColor: Colors.red,
+                          /* border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(30))),*/
-                      // labelText: 'Password',
-                      //errorText: "",
-                      hintText: 'Enter Password',
+                          // labelText: 'Password',
+                          //errorText: "",
+                          hintText: 'Enter Password',
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 150.0),
-                  child: FlatButton(
-                    textColor: Colors.black,
-                    child: const Text(
-                      'Forgot Password ?',
+                    Padding(
+                      padding: const EdgeInsets.only(left: 150.0),
+                      child: FlatButton(
+                        textColor: Colors.black,
+                        child: const Text(
+                          'Forgot Password ?',
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ForgetPassword(),
+                              ));
+                        },
+                      ),
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ForgetPassword(),
-                          ));
-                    },
-                  ),
-                ),
-                Container(
-                  width: 290,
-                  margin: const EdgeInsets.only(top: 50.0),
-                  padding: const EdgeInsets.all(0.0),
-                  decoration: const BoxDecoration(
-                      color: Colors.deepOrangeAccent,
-                      borderRadius: BorderRadius.all(Radius.circular(30))),
-                  child: FlatButton(
-                    padding: const EdgeInsets.all(10),
-                    textColor: Colors.white,
-                    child: const Text(
-                      'LOGIN',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    onPressed: () {
-                      String username = usernameController.text;
-                      String password = passwordController.text;
-                      if (username != '' && password != '') {
-                        print('Successful');
-                        /*  logindata.setBool('login', false);
+                    Container(
+                      width: 290,
+                      margin: const EdgeInsets.only(top: 50.0),
+                      padding: const EdgeInsets.all(0.0),
+                      decoration: const BoxDecoration(
+                          color: Colors.deepOrangeAccent,
+                          borderRadius: BorderRadius.all(Radius.circular(30))),
+                      child: FlatButton(
+                        padding: const EdgeInsets.all(10),
+                        textColor: Colors.white,
+                        child: const Text(
+                          'LOGIN',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        onPressed: () {
+                          String username = usernameController.text;
+                          String password = passwordController.text;
+                          if (username != '' && password != '') {
+                            print('Successful');
+                            /*  logindata.setBool('login', false);
                             logindata.setString('username', username);*/
-                        print(username);
-                        //print(password);
-                        //callSharedPref(username);
-                        login();
-                        /*Navigator.push(
+                            print(username);
+                            //print(password);
+                            //callSharedPref(username);
+                            login();
+                            /*Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => HomePage(title: username),
                           ),
                         );*/
-                        // _navigateToNextScreen(context);
-                        /* Navigator.push(context,
+                            // _navigateToNextScreen(context);
+                            /* Navigator.push(context,
                                 MaterialPageRoute(builder: (context) => const HomePage()));*/
-                      }
-                    },
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.only(top: 110.0, left: 0),
-                      child: const Text(
-                        "Don't have an account ?",
-                        style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black),
+                          }
+                          else{
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(content: Text("Black Field Not Allowed")));
+                          }
+                        },
                       ),
                     ),
-                    Container(
-                      padding: const EdgeInsets.only(top: 110.0, left: 0),
-                      margin: const EdgeInsets.only(right: 0, left: 0),
-                      /* child: FlatButton(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.only(top: 77.0, left: 0),
+                          child: const Text(
+                            "Don't have an account ?",
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.black),
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.only(top: 77.0, left: 0),
+                          margin: const EdgeInsets.only(right: 0, left: 0),
+                          /* child: FlatButton(
                         textColor: Colors.red,
                         child: const Text(
                           'Register',
@@ -273,29 +280,30 @@ class _LoginPageState extends State<LoginPage> {
                         },
                       ),*/
 
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          padding: const EdgeInsets.all(1.0),
-                          primary: Colors.red,
-                          textStyle: const TextStyle(fontSize: 15),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const RegistrationForm(),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              padding: const EdgeInsets.all(1.0),
+                              primary: Colors.red,
+                              textStyle: const TextStyle(fontSize: 15),
                             ),
-                          );
-                        },
-                        child: const Text('Register'),
-                      ),
-                    ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const RegistrationForm(),
+                                ),
+                              );
+                            },
+                            child: const Text('Register'),
+                          ),
+                        ),
+                      ],
+                    )
                   ],
-                )
-              ],
-            ),
-          ),
-        ],
+                ),
+              ),
+            ],
+          )
       ),
     );
   }
@@ -317,8 +325,8 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Center(
               child: Container(
-                margin: EdgeInsets.all(10),
-                padding: EdgeInsets.all(10),
+                margin: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
@@ -463,17 +471,14 @@ class _LoginPageState extends State<LoginPage> {
 
   //CREATE FUNCITON TO CALL LOGIN POST API
   Future<void> login() async {
-    print("login method called ");
     if (passwordController.text.isNotEmpty &&
         usernameController.text.isNotEmpty) {
-      print("login method called----1 ");
       var response = await http.post(Uri.parse("https://regres.in/api/login"),
           body: ({
             'email': usernameController.text,
             'password': passwordController.text
           }));
-      if (response.statusCode == 200) {
-        print("login method called-----2 ");
+      if (response.statusCode == 302) {
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -481,11 +486,11 @@ class _LoginPageState extends State<LoginPage> {
                     HomePage(title: usernameController.text)));
       } else {
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Invalid Credentials.")));
+            .showSnackBar(const SnackBar(content: Text("Invalid Credentials."),),);
       }
     } else {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Black Field Not Allowed")));
+          .showSnackBar(const SnackBar(content: Text("Black Field Not Allowed"),),);
     }
   }
 }
