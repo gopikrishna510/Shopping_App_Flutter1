@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:shopping_app_flutter/Classes/listitems.dart';
+import 'package:shopping_app_flutter/models/listitems.dart';
 import 'package:shopping_app_flutter/Database/database_helper.dart';
 import 'package:shopping_app_flutter/Database/local_storage.dart';
 
