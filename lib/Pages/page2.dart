@@ -74,7 +74,7 @@ class _Page2State extends State<Page2> {
                     crossAxisCount: 2,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
-                    childAspectRatio: 4),
+                    childAspectRatio: 7),
                 itemBuilder: (context, index) {
                   return container(context, index);
                   //Text(itemModel[index].description.toString());
