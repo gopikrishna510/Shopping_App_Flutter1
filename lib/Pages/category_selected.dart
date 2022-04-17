@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:rest_api_integration/model/item_model.dart';
+import 'package:shopping_app_flutter/models/item_model.dart';
+
 class CategorySelected extends StatefulWidget {
   const CategorySelected({Key? key, this.category}) : super(key: key);
   final dynamic category;
