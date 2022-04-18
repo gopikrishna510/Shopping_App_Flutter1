@@ -408,15 +408,16 @@ class _LoginPageState extends State<LoginPage> {
                             print('Successful');
                             /*  logindata.setBool('login', false);
                             logindata.setString('username', username);*/
-                            print(username);
+                            //print(username);
                             //print(password);
-                            callSharedPref(username);
-                            Navigator.push(
+                            //callSharedPref(username);
+                            login();
+                          /*  Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => HomePage(title: username),
                               ),
-                            );
+                            );*/
                             //  _navigateToNextScreen(context);
                             /* Navigator.push(context,
                                 MaterialPageRoute(builder: (context) => const HomePage()));*/
@@ -473,12 +474,13 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> login() async {
     if (passwordController.text.isNotEmpty &&
         usernameController.text.isNotEmpty) {
-      var response = await http.post(Uri.parse("https://regres.in/api/login"),
+      var response = await http.post(Uri.parse("https://reqres.in/api/login"),
           body: ({
             'email': usernameController.text,
             'password': passwordController.text
           }));
-      if (response.statusCode == 302) {
+      print("status code ${response.statusCode}");
+      if (response.statusCode == 200) {
         Navigator.push(
             context,
             MaterialPageRoute(
