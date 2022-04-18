@@ -40,7 +40,9 @@ class _SplashScreenState extends State<SplashScreen> {
    SharedPreferences prefs = await SharedPreferences.getInstance();
    //Return String
    String? stringValue = prefs.getString('title');
+   String? stringToken = prefs.getString('token');
    title = stringValue;
+   token = stringToken;
    print('Welcome----->' + title);
    return stringValue;
  // ignore: empty_catches
@@ -50,10 +52,11 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   var title;
+  late var token;
 
   //the about title returning null so,to checking for user might refresh the page it's opening the HomePage so make user safety  i make like this
   Widget checkForNullValues(BuildContext context) {
-    if (title == null) {
+    if (token == null) {
       return const LoginPage();
     } else {
       return HomePage(title: title);
