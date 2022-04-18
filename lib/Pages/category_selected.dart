@@ -34,13 +34,13 @@ class _CategorySelectedState extends State<CategorySelected> {
     categoryName = widget.category;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("API Cart Demo"),
+        title: Text(categoryName),
       ),
       body: FutureBuilder(
           future: apiCall(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return const Text("Data Loading");
+              return const Center(child: CircularProgressIndicator());
             } else {
               return GridView.builder(
                 itemCount: itemModel.length,
