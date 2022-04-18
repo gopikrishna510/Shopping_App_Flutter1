@@ -29,12 +29,10 @@ class Page2 extends StatefulWidget {
 }
 
 class _Page2State extends State<Page2> {
-  //late List categoriesList = [];
   dynamic data;
 
   @override
   void initState() {
-    // apiCall();
     super.initState();
   }
 
@@ -53,9 +51,6 @@ class _Page2State extends State<Page2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Items_Categories"),
-      ),
       body: FutureBuilder<http.Response>(
           future: apiCall(),
           builder: (context, snapshot) {
@@ -74,7 +69,7 @@ class _Page2State extends State<Page2> {
                     crossAxisCount: 2,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
-                    childAspectRatio: 7),
+                    childAspectRatio: 4),
                 itemBuilder: (context, index) {
                   return container(context, index);
                   //Text(itemModel[index].description.toString());
@@ -92,14 +87,15 @@ class _Page2State extends State<Page2> {
         onTap: () => Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => CategorySelected(category:data[index]),
-          ),),
+            builder: (context) => CategorySelected(category: data[index]),
+          ),
+        ),
         child: Center(
             child: Text(data[index],
                 style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
-                    fontSize: 28))),
+                    fontSize: 20))),
       ),
     );
   }
