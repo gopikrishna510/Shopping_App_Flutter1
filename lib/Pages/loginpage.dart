@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:io' show Platform;
@@ -24,6 +26,7 @@ class _LoginPageState extends State<LoginPage> {
 
   // late SharedPreferences logindata;
   late bool newuser;
+  late String uname;
 
   @override
   void initState() {
@@ -464,10 +467,16 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   //setting up the shared preferences
-  Future<void> callSharedPref(String title) async {
+ /* Future<void> callSharedPref(String title) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return String
     prefs.setString('title', title);
+  }*/
+  Future<void> callSharedPref(String title ,String token) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return String
+    prefs.setString('title', title);
+    prefs.setString('token', token);
   }
 
   //CREATE FUNCITON TO CALL LOGIN POST API
@@ -479,13 +488,19 @@ class _LoginPageState extends State<LoginPage> {
             'email': usernameController.text,
             'password': passwordController.text
           }));
-      print("status code ${response.statusCode}");
       if (response.statusCode == 200) {
+        var mapResponse = json.decode(response.body);
+        String token = mapResponse['token'];
+        uname =usernameController.text;
+        //this used to display name in homepage
+        int indexValue= uname.indexOf('@');
+        String tokenUName =uname.substring(0,indexValue);
+        callSharedPref(tokenUName,token);
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) =>
-                    HomePage(title: usernameController.text)));
+                    HomePage(title: tokenUName)));
       } else {
         ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Invalid Credentials."),),);
