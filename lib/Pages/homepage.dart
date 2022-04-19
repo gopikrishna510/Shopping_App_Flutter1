@@ -170,7 +170,7 @@ class _HomePageState extends State<HomePage> {
         ),
         ListTile(
           leading: const Icon(Icons.home),
-          title: const Text('Home'),
+          title: const Text('Home Page'),
           onTap: () {
             // Navigator.pop(context);
             Navigator.push(
@@ -182,31 +182,54 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         ListTile(
-          leading: const Icon(Icons.account_circle),
-          title: const Text('Profile'),
+          leading: const Icon(Icons.person_outline_outlined),
+          title: const Text('My Account'),
           onTap: () {
             Navigator.pop(context);
           },
         ),
+        ListTile(
+          title: const Text('Orders'),
+          leading: const Icon(Icons.card_travel_rounded),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          title: const Text('Shopping cart'),
+          leading: const Icon(Icons.shopping_cart),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          title: const Text('Favourites'),
+          leading: const Icon(Icons.favorite),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        const SizedBox(),
         ListTile(
           title: const Text('Settings'),
           leading: const Icon(Icons.settings),
           onTap: () {
-            Navigator.pop(context);
-          },
-        ),
-        ListTile(
-          title: const Text('Logout'),
-          leading: const Icon(Icons.logout),
-          onTap: () {
             //to close the drawer before the appearing  the popup box
             Navigator.pop(context);
             //by using this we can  show popup box
-            showDialog(
+            //for practicing commenting this after setting page developed i'll add logout module there
+            /*showDialog(
               context: context,
               builder: (BuildContext context) =>
                   _buildPopupDialogForLogout(context),
-            );
+            );*/
+          },
+        ),
+        ListTile(
+          title: const Text('About'),
+          leading: const Icon(Icons.question_mark),
+          onTap: () {
+            Navigator.pop(context);
           },
         ),
       ],
