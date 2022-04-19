@@ -60,7 +60,6 @@ class HomePageListState extends State<HomePageList> {
 
   @override
   Widget build(BuildContext context) {
-    print(listItems);
     return GridView.builder(
       itemCount: listItems.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
